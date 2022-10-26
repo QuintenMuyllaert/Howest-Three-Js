@@ -82,6 +82,21 @@ function Three() {
 			controls.update();
 		}
 		renderer.setAnimationLoop(animate);
+
+		const resizeEventListener = () => {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+			camera.aspect = canvas.width / canvas.height;
+			camera.updateProjectionMatrix();
+			renderer.setSize(canvas.width, canvas.height);
+		};
+		window.addEventListener("resize", resizeEventListener);
+		resizeEventListener();
+
+		return () => {
+			window.removeEventListener("resize", resizeEventListener);
+			renderer.dispose();
+		};
 	}, [canvasRef]);
 
 	return <canvas ref={canvasRef} />;
