@@ -90,12 +90,36 @@ function Three() {
 			camera.aspect = canvas.width / canvas.height;
 			camera.updateProjectionMatrix();
 			renderer.setSize(canvas.width, canvas.height);
+			renderer.setPixelRatio(window.devicePixelRatio);
 		};
 		window.addEventListener("resize", resizeEventListener);
 		resizeEventListener();
 
+		/**
+		 * Raycaster
+		 */
+
+		const onClickCanvas = canvas.addEventListener("click", (event) => {
+			const { x, y } = event;
+			const { width, height } = canvas;
+
+			const xNormalized = (x / width) * 2 - 1;
+			const yNormalized = -(y / height) * 2 + 1;
+
+			//cast a ray from the camera to the mouse position
+			const ray = new THREE.Raycaster();
+			ray.setFromCamera({ x: xNormalized, y: yNormalized }, camera);
+
+			const intersects = ray.intersectObjects(scene.children);
+
+			for (let i = 0; i < intersects.length; i++) {
+				intersects[i].object.material.color.set(0xffffff * Math.random());
+			}
+		});
+
 		// Dispose of the renderer when the component unmounts
 		return () => {
+			canvas.removeEventListener("click", onClickCanvas);
 			window.removeEventListener("resize", resizeEventListener);
 			renderer.dispose();
 		};
