@@ -1,8 +1,12 @@
-import "./App.css";
-import "./scripts/three";
+import "./css/style.css";
+import Three from "./scripts/three";
 
 function App() {
-	return <div className="App">Put canvas here</div>;
+	return (
+		<div className="App">
+			<Three />
+		</div>
+	);
 }
 
 export default App;

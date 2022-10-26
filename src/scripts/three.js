@@ -6,33 +6,45 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
-/**
- * Base
- */
+import { useRef, useEffect } from "react";
+function Three() {
+	const canvasRef = useRef(null);
 
-// Canvas
+	useEffect(() => {
+		/**
+		 * Base
+		 */
 
-// Scene
+		// Canvas
+		const canvas = canvasRef.current;
+		console.log(canvas);
+		// Scene
 
-/**
- * Models
- */
+		/**
+		 * Models
+		 */
 
-/**
- * Lights
- */
+		/**
+		 * Lights
+		 */
 
-/**
- * Sizes
- */
+		/**
+		 * Sizes
+		 */
 
-/**
- * Camera
- */
-// Base camera
+		/**
+		 * Camera
+		 */
+		// Base camera
 
-// Controls
+		// Controls
 
-/**
- * Renderer
- */
+		/**
+		 * Renderer
+		 */
+	}, [canvasRef]);
+
+	return <canvas ref={canvasRef} />;
+}
+
+export default Three;
