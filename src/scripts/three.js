@@ -75,6 +75,11 @@ function Three() {
 
 		// Controls
 		const controls = new OrbitControls(camera, renderer.domElement);
+		controls.target.set(0, 0, 0);
+		controls.rotateSpeed = 10;
+		controls.enableDamping = true;
+		controls.enableZoom = true;
+		controls.autoRotate = true;
 
 		renderer.setAnimationLoop(() => {
 			renderer.render(scene, camera);
